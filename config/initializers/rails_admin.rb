@@ -23,6 +23,8 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  config.main_app_name = Proc.new { |controller| [ "IBF Admin", "#{controller.params[:action].try(:titleize)}" ] }
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
