@@ -1,0 +1,49 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <div class="img-thumbnail">
+    <%= image_tag("ibf-logo.jpg", size: "120x120") %>
+  </div>
+
+  <h4>Sistema IBF</h4>
+
+  <% if flash[:notice].present? %>
+    <div class="alert alert-info">
+      <%= button_tag '', class: 'close', data: { dismiss:'alert' } do %>
+        <span aria-hidden="true">&times;</span>
+      <% end %>
+      <span class="glyphicon glyphicon-info-sign"></span>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger">
+      <%= button_tag '', class: 'close', data: { dismiss:'alert' } do %>
+        <span aria-hidden="true">&times;</span>
+      <% end %>
+      <span class="glyphicon glyphicon-exclamation-sign"></span>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.email_field :email, class: "form-control input-lg", autofocus: true, autocomplete: "email", placeholder: "#{t'helper.placeholder.email'}" %>
+  </div>
+  <div class="field">
+    <%= f.password_field :password, class: "form-control input-lg", autocomplete: "off", placeholder: "#{t'helper.placeholder.password'}" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field" id="remember-me">
+      <%= f.check_box :remember_me %>
+      <%= f.label t('helper.label.remember_me') %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Login", class: "btn btn-primary form-control input-lg", id: "login-button" %>
+  </div>
+
+  <%= render "devise/shared/links" %>
+
+<% end %>
