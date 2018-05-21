@@ -6,6 +6,25 @@ pt-BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+    attributes:
+      user:
+        name: Nome
+        kind: Grupo
+        status: Status
+        reset_password_token: Token de reconfiguração de senha
+        reset_password_sent_at: Reconfiguração de senha enviada em
+        remember_created_at: Lembrar senha criada em
+        sign_in_count: Contagem de logins
+        current_sign_in_at: Login atual realizado em
+        last_sign_in_at: Último login realizado em
+        current_sign_in_ip: IP do login atual
+        last_sign_in_ip: IP do último login
+        created_at: Criado em
+        updated_at: Atualizado em
   date:
     abbr_day_names:
     - Dom
