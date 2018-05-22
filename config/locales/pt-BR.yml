@@ -14,7 +14,9 @@ pt-BR:
       user:
         name: Nome
         kind: Grupo
-        status: Status
+        status_enum:
+          active: Ativo
+          inactive: Inativo
         reset_password_token: Token de reconfiguração de senha
         reset_password_sent_at: Reconfiguração de senha enviada em
         remember_created_at: Lembrar senha criada em
