@@ -1,18 +1,26 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  include UserAdmin
+
   devise :database_authenticatable,
-         # :registerable,
-         # :recoverable,
          :rememberable,
          :trackable,
          :validatable
   enum status: [:active, :inactive]
-  enum kind: [:admin, :secretary]
+  enum group: [:admin, :secretary]
 
   def status
-    status = read_attribute :status
-    I18n::t("activerecord.attributes.user.status_enum.#{status}")
+    enum_value :status
   end
+
+  def group
+    enum_value :group
+  end
+
+  private
+
+    def enum_value field
+      value = read_attribute field
+      I18n::t("activerecord.attributes.user.#{field.to_s}_enum.#{value}")
+    end
 
 end

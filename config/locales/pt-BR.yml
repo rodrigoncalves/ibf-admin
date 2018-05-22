@@ -13,10 +13,15 @@ pt-BR:
     attributes:
       user:
         name: Nome
-        kind: Grupo
+        group: Grupo
         status_enum:
           active: Ativo
           inactive: Inativo
+        group_enum:
+          admin: Administração
+          secretary: Secretaria
+        password: Senha
+        password_confirmation: Confirmação de senha
         reset_password_token: Token de reconfiguração de senha
         reset_password_sent_at: Reconfiguração de senha enviada em
         remember_created_at: Lembrar senha criada em
