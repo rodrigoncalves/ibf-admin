@@ -27,6 +27,19 @@ module UserAdmin
           end
         end
       end
+      list do
+        field :name
+        field :email
+        field :role
+        field :status
+      end
+      show do
+        field :name
+        field :email
+        field :role
+        field :status
+        field :created_at
+      end
     end
   end
 end
