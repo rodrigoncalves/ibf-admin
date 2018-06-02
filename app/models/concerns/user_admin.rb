@@ -9,9 +9,9 @@ module UserAdmin
             Hash[User.statuses.map{|k,v| [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]}]
           end
         end
-        configure :group, :enum do
+        configure :role, :enum do
           enum do
-            Hash[User.groups.map{|k,v| [I18n::t("activerecord.attributes.user.group_enum.#{k}"),v]}]
+            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
           end
         end
       end
@@ -21,9 +21,9 @@ module UserAdmin
             Hash[User.statuses.map{|k,v| [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]}]
           end
         end
-        configure :group, :enum do
+        configure :role, :enum do
           enum do
-            Hash[User.groups.map{|k,v| [I18n::t("activerecord.attributes.user.group_enum.#{k}"),v]}]
+            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
           end
         end
       end

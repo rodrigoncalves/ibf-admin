@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :trackable,
          :validatable
   enum status: [:active, :inactive]
-  enum group: [:admin, :secretary]
+  enum role: [:root, :admin, :secretary]
 
   def status
     enum_value :status

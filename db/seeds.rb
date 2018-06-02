@@ -1,2 +1,2 @@
 # Users
-User.create name: 'Rodrigo Gonçalves', status: :active, group: :admin, email: 'rodrigosg2000@gmail.com', password: 123456
+User.create name: 'Rodrigo Gonçalves', id: 1, status: :active, role: :root, email: 'rodrigosg2000@gmail.com', password: 123456

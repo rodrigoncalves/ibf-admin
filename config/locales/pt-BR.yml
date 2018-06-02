@@ -13,11 +13,12 @@ pt-BR:
     attributes:
       user:
         name: Nome
-        group: Grupo
+        role: Grupo
         status_enum:
           active: Ativo
           inactive: Inativo
-        group_enum:
+        role_enum:
+          root: Desenvolvedor
           admin: Administração
           secretary: Secretaria
         password: Senha
