@@ -17,6 +17,13 @@ module UserAdmin
             Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
           end
         end
+        field :status, :string do
+          read_only true
+          help false
+          def value
+            I18n::t "activerecord.attributes.user.status_enum.active"
+          end
+        end
       end
       edit do
         field :name
