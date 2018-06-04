@@ -395,9 +395,9 @@ pt-BR:
       too_many_objects: Muitos objetos, utilize o campo de pesquisa abaixo
       no_objects: Nenhum objeto foi encontrado
 
-  helper:
+  login:
     placeholder:
-      email: "E-mail"
+      email: "Email"
       password: "Senha"
     label:
       remember_me: "Lembrar-me"

@@ -27,16 +27,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.email_field :email, class: "form-control input-lg", autofocus: true, autocomplete: "email", placeholder: "#{t'helper.placeholder.email'}" %>
+    <%= f.email_field :email, class: "form-control input-lg", autofocus: true, autocomplete: "email", placeholder: "#{t'login.placeholder.email'}" %>
   </div>
   <div class="field">
-    <%= f.password_field :password, class: "form-control input-lg", autocomplete: "off", placeholder: "#{t'helper.placeholder.password'}" %>
+    <%= f.password_field :password, class: "form-control input-lg", autocomplete: "off", placeholder: "#{t'login.placeholder.password'}" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
     <div class="field" id="remember-me">
       <%= f.check_box :remember_me %>
-      <%= f.label t('helper.label.remember_me') %>
+      <%= f.label t('login.label.remember_me') %>
     </div>
   <% end %>
 
