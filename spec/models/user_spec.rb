@@ -33,9 +33,9 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(false)
     end
 
-    it 'ensures status presence' do
+    it 'ensures no need to specify status' do
       user = User.new name: 'Example', role: :admin, email: 'example@example.com', password: '123456'
-      expect(user.valid?).to eq(false)
+      expect(user.valid?).to eq(true)
     end
 
     it 'ensure presence of all required fields' do

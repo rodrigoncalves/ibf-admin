@@ -11,11 +11,7 @@ class User < ApplicationRecord
   validates :name, :email, :role, :status, presence: true
   validates :password_confirmation, presence: true, on: :update, if: ->{ not password.blank? }
 
-  after_initialize :set_defaults, if: :new_record?
-
-private
-
-  def set_defaults
+  after_initialize on: :create do
     self.status ||= :active
   end
 
