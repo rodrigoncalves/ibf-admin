@@ -13,6 +13,7 @@ pt-BR:
     attributes:
       user:
         name: Nome
+        email: Email
         role: Grupo
         status_enum:
           active: Ativo

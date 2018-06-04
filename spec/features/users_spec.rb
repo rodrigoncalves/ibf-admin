@@ -32,6 +32,28 @@ RSpec.feature "Users", type: :feature do
     end
   end
 
+  context 'new' do
+    it 'as root' do
+      login root
+      visit rails_admin.new_path(model_name: 'user')
+      expect(page).to have_selector('select#user_role', visible: true,
+        text: I18n.t('activerecord.attributes.user.role_enum.root'))
+
+      save_user
+    end
+
+    it 'as admin' do
+      login root
+      visit rails_admin.new_path(model_name: 'user')
+      expect(page).to have_selector('select#user_role', visible: false,
+        text: I18n.t('activerecord.attributes.user.role_enum.root'))
+
+      save_user
+    end
+  end
+
+  # ----- HELPER METHODS ----- #
+
   def login user
     visit ''
     within('#new_user') do
@@ -41,4 +63,22 @@ RSpec.feature "Users", type: :feature do
     click_button 'Login'
     expect(current_path).to eq rails_admin.dashboard_path
   end
+
+  def save_user
+    fill 'name', 'User'
+    fill 'email', 'user@example.com'
+    fill 'password', '123456'
+    fill 'password_confirmation', '123456'
+    fill 'password_confirmation', '123456'
+    select I18n.t('activerecord.attributes.user.role_enum.admin'), from: 'user_role'
+    click_button I18n.t('admin.form.save')
+
+    expect(page).to have_content(I18n.t('admin.flash.successful',
+      name: I18n.t('activerecord.models.user.one'), action: I18n.t('admin.actions.new.done')))
+  end
+
+  def fill field, value
+    fill_in I18n.t("activerecord.attributes.user.#{field}"), with: value
+  end
+
 end
