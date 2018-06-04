@@ -35,8 +35,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Rails Admin
 gem 'rails_admin'
-gem 'devise'
 gem 'rails_admin_rollincode', git: 'https://github.com/rodrigoncalves/rails_admin_theme.git'
+gem 'devise'
+gem 'cancancan', '~> 1.15.0'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.7'
