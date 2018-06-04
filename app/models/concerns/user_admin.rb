@@ -14,7 +14,10 @@ module UserAdmin
         end
         field :role, :enum do
           enum do
-            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
+            Hash[User.roles.map{|k,v|
+              next if k == 'root' and not bindings[:view].current_user.root?
+              [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]
+            }]
           end
         end
         field :status, :string do
@@ -34,7 +37,10 @@ module UserAdmin
         field :status
         field :role, :enum do
           enum do
-            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
+            Hash[User.roles.map{|k,v|
+              next if k == 'root' and not bindings[:view].current_user.root?
+              [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]
+            }]
           end
           def value
             value = bindings[:object].send(:role)
@@ -43,7 +49,9 @@ module UserAdmin
         end
         field :status, :enum do
           enum do
-            Hash[User.statuses.map{|k,v| [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]}]
+            Hash[User.statuses.map{|k,v|
+              [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]
+            }]
           end
           def value
             value = bindings[:object].send(:status)
