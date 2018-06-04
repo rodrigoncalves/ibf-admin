@@ -30,16 +30,37 @@ module UserAdmin
       list do
         field :name
         field :email
-        field :role
-        field :status
+        field :role, :enum do
+          pretty_value do
+            value = bindings[:object].send(:role)
+            I18n::t("activerecord.attributes.user.role_enum.#{value}")
+          end
+        end
+        field :status, :enum do
+          pretty_value do
+            value = bindings[:object].send(:status)
+            I18n::t("activerecord.attributes.user.status_enum.#{value}")
+          end
+        end
       end
       show do
         field :name
         field :email
-        field :role
-        field :status
+        field :role, :enum do
+          pretty_value do
+            value = bindings[:object].send(:role)
+            I18n::t("activerecord.attributes.user.role_enum.#{value}")
+          end
+        end
+        field :status, :enum do
+          pretty_value do
+            value = bindings[:object].send(:status)
+            I18n::t("activerecord.attributes.user.status_enum.#{value}")
+          end
+        end
         field :created_at
       end
     end
   end
+
 end
