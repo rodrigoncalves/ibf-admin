@@ -8,7 +8,6 @@ class User < ApplicationRecord
   enum status: [:inactive, :active]
   enum role: [:root, :admin, :secretary]
 
-  validates :name, :email, :password, :role, :status, presence: true
-  validates :password, length: { in: 6..20 }
+  validates :name, :email, :role, :status, presence: true
 
 end

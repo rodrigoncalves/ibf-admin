@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(false)
 
       # https://stackoverflow.com/questions/88311/how-to-generate-a-random-string-in-ruby
-      random_password = (0...21).map{('a'..'z').to_a[rand(&:to_a)]}.join
+      random_password = (0...129).map{('a'..'z').to_a[rand(&:to_a)]}.join
       user.password = random_password
       expect(user.valid?).to eq(false)
     end

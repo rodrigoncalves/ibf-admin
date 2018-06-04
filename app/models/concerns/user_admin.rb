@@ -4,26 +4,43 @@ module UserAdmin
   included do
     rails_admin do
       create do
-        configure :status, :enum do
-          enum do
-            Hash[User.statuses.map{|k,v| [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]}]
-          end
+        field :name
+        field :email
+        field :password do
+          required true
         end
-        configure :role, :enum do
+        field :password_confirmation do
+          required true
+        end
+        field :role, :enum do
           enum do
             Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
           end
         end
       end
       edit do
-        configure :status, :enum do
+        field :name
+        field :email
+        field :password
+        field :password_confirmation
+        field :role
+        field :status
+        field :role, :enum do
+          enum do
+            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
+          end
+          def value
+            value = bindings[:object].send(:role)
+            I18n::t("activerecord.attributes.user.role_enum.#{value}")
+          end
+        end
+        field :status, :enum do
           enum do
             Hash[User.statuses.map{|k,v| [I18n::t("activerecord.attributes.user.status_enum.#{k}"),v]}]
           end
-        end
-        configure :role, :enum do
-          enum do
-            Hash[User.roles.map{|k,v| [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]}]
+          def value
+            value = bindings[:object].send(:status)
+            I18n::t("activerecord.attributes.user.status_enum.#{value}")
           end
         end
       end
