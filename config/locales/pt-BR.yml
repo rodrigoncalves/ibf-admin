@@ -375,6 +375,26 @@ pt-BR:
         skip_header: "Sem cabeçalho"
         skip_header_help: "Não gerar cabeçalhos para (Campos sem cabeçalho)"
         default_col_sep: ","
+        col_sep_help: "Caractere de sepearação de colunas"
+    js:
+      true: Verdadeiro
+      false: Falso
+      is_present: Está presente
+      is_blank: Em branco
+      date: Data ...
+      between_and_: Entre ... e ...
+      today: Hoje
+      yesterday: Ontem
+      this_week: Esta semana
+      last_week: Semana passada
+      number: Número ...
+      contains: Contém
+      is_exactly: Exatamente
+      starts_with: Inicia com
+      ends_with: Termina com
+      too_many_objects: Muitos objetos, utilize o campo de pesquisa abaixo
+      no_objects: Nenhum objeto foi encontrado
+
   helper:
     placeholder:
       email: "E-mail"
