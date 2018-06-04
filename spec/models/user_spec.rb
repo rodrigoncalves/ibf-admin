@@ -42,6 +42,12 @@ RSpec.describe User, type: :model do
       user = User.new name: 'Example', status: :active, role: :admin, email: 'example@example.com', password: '123456'
       expect(user.valid?).to eq(true)
     end
+
+    it 'uniqueness of email' do
+      u1 = User.create name: 'User1', role: :admin, email: 'example@example.com', password: '123456'
+      u2 = User.create name: 'User2', role: :secretary, email: 'example@example.com', password: '654321'
+      expect(User.count).to eq(1)
+    end
   end
 
 end
