@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(false)
     end
 
-    it 'password has incorrect length' do
+    it 'ensure password has correct length' do
       user = User.new name: 'Example', status: :active, role: :admin, email: 'example@example.com', password: '12345'
       expect(user.valid?).to eq(false)
 
@@ -42,7 +42,6 @@ RSpec.describe User, type: :model do
       user = User.new name: 'Example', status: :active, role: :admin, email: 'example@example.com', password: '123456'
       expect(user.valid?).to eq(true)
     end
-
   end
 
 end

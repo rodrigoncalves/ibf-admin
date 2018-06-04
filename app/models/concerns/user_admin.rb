@@ -84,6 +84,12 @@ module UserAdmin
         end
         field :created_at
       end
+      export do
+        field :name
+        field :email
+        field :role
+        field :status
+      end
     end
   end
 
