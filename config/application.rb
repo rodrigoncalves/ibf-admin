@@ -36,5 +36,7 @@ module IbfAdmin
 
     # For Heroku deploy
     config.assets.initialize_on_precompile = false
+
+    config.time_zone = 'Brasilia'
   end
 end
