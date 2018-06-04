@@ -9,5 +9,6 @@ class User < ApplicationRecord
   enum role: [:root, :admin, :secretary]
 
   validates :name, :email, :role, :status, presence: true
+  validates :password_confirmation, presence: true, on: :update, if: ->{ not password.blank? }
 
 end
