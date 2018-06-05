@@ -39,7 +39,7 @@ RSpec.feature "Users", type: :feature do
       expect(page).to have_selector('select#user_role', visible: true,
         text: I18n.t('activerecord.attributes.user.role_enum.root'))
 
-      save_user
+      create_user
     end
 
     it 'as admin' do
@@ -48,7 +48,27 @@ RSpec.feature "Users", type: :feature do
       expect(page).to have_selector('select#user_role', visible: false,
         text: I18n.t('activerecord.attributes.user.role_enum.root'))
 
-      save_user
+      create_user
+    end
+  end
+
+  context 'edit' do
+    it 'as root' do
+      login root
+      visit rails_admin.edit_path(model_name: 'user', id: root.id)
+      expect(page).to have_selector('select#user_role', visible: true,
+        text: I18n.t('activerecord.attributes.user.role_enum.root'))
+
+      edit_user
+    end
+
+    it 'as admin' do
+      login admin
+      visit rails_admin.edit_path(model_name: 'user', id: admin.id)
+      expect(page).not_to have_selector('select#user_role',
+        text: I18n.t('activerecord.attributes.user.role_enum.root'))
+
+      edit_user
     end
   end
 
@@ -64,17 +84,23 @@ RSpec.feature "Users", type: :feature do
     expect(current_path).to eq rails_admin.dashboard_path
   end
 
-  def save_user
+  def create_user
     fill 'name', 'User'
     fill 'email', 'user@example.com'
     fill 'password', '123456'
-    fill 'password_confirmation', '123456'
     fill 'password_confirmation', '123456'
     select I18n.t('activerecord.attributes.user.role_enum.admin'), from: 'user_role'
     click_button I18n.t('admin.form.save')
 
     expect(page).to have_content(I18n.t('admin.flash.successful',
-      name: I18n.t('activerecord.models.user.one'), action: I18n.t('admin.actions.new.done')))
+      name: I18n.t('activerecord.models.user.one'), action: I18n.t("admin.actions.new.done")))
+  end
+
+  def edit_user
+    click_button I18n.t('admin.form.save')
+
+    expect(page).to have_content(I18n.t('admin.flash.successful',
+      name: I18n.t('activerecord.models.user.one'), action: I18n.t("admin.actions.edit.done")))
   end
 
   def fill field, value
