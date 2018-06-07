@@ -2,9 +2,9 @@ class User < ApplicationRecord
   include UserAdmin
 
   devise :database_authenticatable,
-         :rememberable,
-         :trackable,
-         :validatable
+  :rememberable,
+  :trackable,
+  :validatable
   enum status: [:inactive, :active]
   enum role: [:root, :admin, :secretary]
 
@@ -14,5 +14,7 @@ class User < ApplicationRecord
   after_initialize on: :create do
     self.status ||= :active
   end
+
+  has_paper_trail
 
 end
