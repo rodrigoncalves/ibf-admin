@@ -32,6 +32,23 @@ RSpec.feature "Users", type: :feature do
     end
   end
 
+  context 'show' do
+    it 'root' do
+      login root
+      show_user root
+    end
+
+    it 'admin' do
+      login root
+      show_user root
+    end
+
+    it 'secretary' do
+      login root
+      show_user secretary
+    end
+  end
+
   context 'new' do
     it 'as root' do
       login root
@@ -101,6 +118,11 @@ RSpec.feature "Users", type: :feature do
     end
     click_button 'Login'
     expect(current_path).to eq rails_admin.dashboard_path
+  end
+
+  def show_user user
+    visit rails_admin.show_path(model_name: 'user', id: user.id)
+    expect(page).to have_content(I18n.t("activerecord.attributes.user.role_enum.#{user.role}"))
   end
 
   def create_user
