@@ -72,6 +72,25 @@ RSpec.feature "Users", type: :feature do
     end
   end
 
+  context 'delete' do
+    it 'another user' do
+      login admin
+      visit rails_admin.index_path(model_name: 'user')
+      expect(page).to have_selector('table tbody tr.user_row', count: 2)
+      delete_user secretary.id
+      expect(page).to have_selector('table tbody tr.user_row', count: 1)
+    end
+
+    it 'itself' do
+      login admin
+      visit rails_admin.index_path(model_name: 'user')
+      expect(page).to have_selector('table tbody tr.user_row', count: 2)
+      delete_user admin.id
+      expect(page).to have_content "Sistema IBF"
+      expect(page).to have_content I18n.t('devise.failure.unauthenticated')
+    end
+  end
+
   # ----- HELPER METHODS ----- #
 
   def login user
@@ -101,6 +120,10 @@ RSpec.feature "Users", type: :feature do
 
     expect(page).to have_content(I18n.t('admin.flash.successful',
       name: I18n.t('activerecord.models.user.one'), action: I18n.t("admin.actions.edit.done")))
+  end
+
+  def delete_user id
+    page.driver.submit :delete, rails_admin.delete_path(model_name: 'user', id: id), {}
   end
 
   def fill field, value
