@@ -14,8 +14,9 @@ module UserAdmin
         end
         field :role, :enum do
           enum do
-            Hash[User.roles.map{|k,v|
-              next if k == 'root' and not bindings[:view].current_user.root?
+            roles = User.roles.clone
+            roles.delete("root") unless bindings[:view].current_user.root?
+            Hash[roles.map{|k,v|
               [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]
             }]
           end
@@ -37,8 +38,9 @@ module UserAdmin
         field :status
         field :role, :enum do
           enum do
-            Hash[User.roles.map{|k,v|
-              next if k == 'root' and not bindings[:view].current_user.root?
+            roles = User.roles.clone
+            roles.delete("root") unless bindings[:view].current_user.root?
+            Hash[roles.map{|k,v|
               [I18n::t("activerecord.attributes.user.role_enum.#{k}"),v]
             }]
           end
