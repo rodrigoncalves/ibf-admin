@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Rails Admin
-gem 'rails_admin'
+gem 'rails_admin', '~> 1.3'
 gem 'rails_admin_rollincode', git: 'https://github.com/rodrigoncalves/rails_admin_theme.git'
 gem 'devise'
 gem 'cancancan', '~> 1.15.0'
