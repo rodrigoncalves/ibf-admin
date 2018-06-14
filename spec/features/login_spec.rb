@@ -52,9 +52,7 @@ RSpec.feature "Login", type: :feature do
 
     it 'by inactive user' do
       expect(secretary.access_locked?).to eq(false)
-      secretary.status = :inactive
-      expect(secretary.valid?).to eq(true), secretary.errors.full_messages
-      secretary.save
+      secretary.update_attributes(status: :inactive)
       expect(secretary.access_locked?).to eq(true)
 
       visit ''
