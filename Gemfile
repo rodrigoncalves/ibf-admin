@@ -39,6 +39,7 @@ gem 'rails_admin_rollincode', git: 'https://github.com/rodrigoncalves/rails_admi
 gem 'devise'
 gem 'cancancan', '~> 1.15.0'
 gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.7'
