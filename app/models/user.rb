@@ -18,6 +18,7 @@ class User < ApplicationRecord
     :current_sign_in_ip,
     :last_sign_in_ip,
     :locked_at,
+    :created_at,
     :updated_at
   ]
 

@@ -15,6 +15,7 @@ pt-BR:
         name: Nome
         email: Email
         role: Grupo
+        status: Status
         status_enum:
           active: Ativo
           inactive: Inativo
@@ -22,6 +23,7 @@ pt-BR:
           root: Desenvolvedor
           admin: Administração
           secretary: Secretaria
+        encrypted_password: Senha
         password: Senha
         password_confirmation: Confirmação de senha
         reset_password_token: Token de reconfiguração de senha
@@ -246,9 +248,7 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
-
   # Rails Admin
-  views:
   admin:
     home:
       name: Home
@@ -395,7 +395,13 @@ pt-BR:
       ends_with: Termina com
       too_many_objects: Muitos objetos, utilize o campo de pesquisa abaixo
       no_objects: Nenhum objeto foi encontrado
-
+  # Paper Trail
+  paper_trail:
+    events:
+      create: Criado
+      update: Atualizado
+      destroy: Apagado
+  # Login
   login:
     placeholder:
       email: "Email"
