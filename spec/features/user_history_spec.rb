@@ -12,29 +12,58 @@ RSpec.feature "User history", type: :feature do
     secretary.save
   end
 
-  it 'root can view all user histories' do
-    login root
+  context 'at dashboard' do
+    it 'root can view all user histories' do
+      login root
 
-    visit rails_admin.history_index_path(model_name: 'user')
-    expect(page).to have_content(root.name)
-    expect(page).to have_content(admin.name)
-    expect(page).to have_content(secretary.name)
+      visit rails_admin.dashboard_path(model_name: 'user')
+      expect(page).to have_content(root.name)
+      expect(page).to have_content(admin.name)
+      expect(page).to have_content(secretary.name)
+    end
+
+    it 'admin cannot view root history' do
+      login admin
+
+      visit rails_admin.dashboard_path(model_name: 'user')
+      expect(page).not_to have_content(root.name)
+      expect(page).to have_content(admin.name)
+      expect(page).to have_content(secretary.name)
+    end
+
+    it 'secretary cannot view history table' do
+      login secretary
+
+      visit rails_admin.dashboard_path(model_name: 'user')
+      expect(page).not_to have_content(I18n::t("admin.actions.history_index.menu"))
+    end
   end
 
-  it 'admin cannot view root history' do
-    login admin
+  context 'at history index' do
+    it 'root can view all user histories' do
+      login root
 
-    visit rails_admin.history_index_path(model_name: 'user')
-    expect(page).not_to have_content(root.name)
-    expect(page).to have_content(admin.name)
-    expect(page).to have_content(secretary.name)
-  end
+      visit rails_admin.history_index_path(model_name: 'user')
+      expect(page).to have_content(root.name)
+      expect(page).to have_content(admin.name)
+      expect(page).to have_content(secretary.name)
+    end
 
-  it 'secretary cannot access user history path' do
-    login secretary
+    it 'admin cannot view root history' do
+      login admin
 
-    visit rails_admin.history_index_path(model_name: 'user')
-    expect(page).to have_content('You are not authorized to access this page.')
+      visit rails_admin.history_index_path(model_name: 'user')
+      expect(page).not_to have_content(root.name)
+      expect(page).to have_content(admin.name)
+      expect(page).to have_content(secretary.name)
+    end
+
+    it 'secretary cannot access user history path' do
+      login secretary
+
+      visit rails_admin.history_index_path(model_name: 'user')
+      expect(page).to have_content('You are not authorized to access this page.')
+    end
   end
 
   # ----- HELPER METHODS ----- #

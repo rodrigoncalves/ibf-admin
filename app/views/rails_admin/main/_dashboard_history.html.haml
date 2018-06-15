@@ -1,0 +1,26 @@
+%table.table.table-condensed.table-striped
+  %thead
+    %tr
+      %th.shrink.user= t("admin.table_headers.username")
+      %th.shrink.items= t("admin.table_headers.item")
+      %th.changes= t("admin.table_headers.changes")
+  %tbody
+    - @history.each do |t|
+      - abstract_model = RailsAdmin.config(t.table).abstract_model
+      -# check if the current_user is allowed to access item
+      - clazz = Object.const_get(t.table)
+      - item = clazz.find t.item
+      - ability = Ability.new(current_user)
+      - if clazz.respond_to? :accessible_by and clazz.accessible_by(ability).include?(item)
+        %tr
+          %td= t.try :username
+          - if o = abstract_model.try(:get, t.item)
+            - label = o.send(abstract_model.config.object_label_method)
+            - if show_action = action(:show, abstract_model, o)
+              %td= link_to(label, url_for(action: show_action.action_name, model_name: abstract_model.to_param, id: o.id), class: 'pjax')
+            - else
+              %td= label
+          - else
+            - label = Object.const_defined?(t.table) ? t.table.constantize.model_name.human : t.table
+            %td= "#{label} ##{t.item}"
+          %td= t.message
